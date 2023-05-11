@@ -72,9 +72,7 @@ function generateRandomQuote() {
 // Function to handle visibility change
 function handleVisibilityChange() {
   if (!document.hidden) {
-    // Tab is visible, show the animation and generate a new quote
-    var quoteContainer = document.getElementById("quote-container");
-    quoteContainer.classList.add('show');
+    // Tab is visible, generate a new quote
     generateRandomQuote();
   }
 }
@@ -89,4 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners for visibility change
     document.addEventListener("visibilitychange", handleVisibilityChange);
   }
+});
+
+// Animation
+window.addEventListener("load", function () {
+  var quoteContainer = document.getElementById("quote-container");
+  quoteContainer.classList.add('show');
 });
