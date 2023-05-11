@@ -1,62 +1,72 @@
 /* CSS styles */
 body {
-    background: linear-gradient(to right, #ff9a9e, #fad0c4);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
 #quote-container {
-    text-align: center;
-    color: #333;
-    opacity: 0;
-    transform: translateY(100%);
-    animation: fadeIn 1s ease-in-out forwards;
+  text-align: center;
+  color: #333;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 #quote {
-    font-size: 36px;
-    margin-bottom: 10px;
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
 #author {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0%);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }
 
 /* Media queries */
 @media (max-width: 768px) {
-    #quote {
-        font-size: 28px;
-    }
+  #quote {
+    font-size: 40px;
+  }
 
-    #author {
-        font-size: 14px;
-    }
+  #author {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
-    #quote {
-        font-size: 22px;
-    }
+  #quote {
+    font-size: 40px;
+  }
 
-    #author {
-        font-size: 12px;
-    }
+  #author {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 320px) {
+  #quote {
+    font-size: 36px;
+  }
+
+  #author {
+    font-size: 16px;
+  }
 }
