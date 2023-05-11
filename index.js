@@ -87,10 +87,12 @@ function handleVisibilityChange() {
     var quoteContainer = document.getElementById("quote-container");
     quoteContainer.classList.remove('show');
   } else {
-    // Tab is visible, restart the animation and generate a new quote
-    var quoteContainer = document.getElementById("quote-container");
-    quoteContainer.classList.add('show');
+    // Tab is visible, generate a new quote and check if animation needs to be restarted
     generateRandomQuote();
+    var quoteContainer = document.getElementById("quote-container");
+    if (!quoteContainer.classList.contains('show')) {
+      quoteContainer.classList.add('show');
+    }
   }
 }
 
