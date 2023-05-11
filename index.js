@@ -100,6 +100,28 @@ function generateRandomQuote() {
   localStorage.setItem('previousQuote', quotes[randomIndex].text);
 }
 
+// Function to remove duplicate quotes
+function removeDuplicateQuotes() {
+  var uniqueQuotes = [];
+  var quoteTexts = [];
+
+  for (var i = 0; i < quotes.length; i++) {
+    var quote = quotes[i];
+
+    // Check if the quote text is already in the quoteTexts array
+    if (!quoteTexts.includes(quote.text)) {
+      uniqueQuotes.push(quote);
+      quoteTexts.push(quote.text);
+    }
+  }
+
+  // Update the quotes array with unique quotes
+  quotes = uniqueQuotes;
+}
+
+// Remove duplicate quotes
+removeDuplicateQuotes();
+
 // Wait for the document to load
 document.addEventListener('DOMContentLoaded', function() {
   // Add 'show' class to trigger the animation
@@ -109,3 +131,5 @@ document.addEventListener('DOMContentLoaded', function() {
   // Generate a random quote
   generateRandomQuote();
 });
+
+
