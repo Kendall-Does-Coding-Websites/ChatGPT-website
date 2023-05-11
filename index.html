@@ -1,67 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Animated Text with Gradient Background</title>
+    <title>Random Quote Generator</title>
     <style>
-    body {
-        background: linear-gradient(to right, #ff9a9e, #fad0c4);
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-    }
+        /* CSS styles */
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
 
-    .text-container {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #333;
-        opacity: 0;
-        transform: translateY(100%);
-        animation: fadeIn 0.8s cubic-bezier(0, 1, 0.3, 1) forwards;
-    }
-
-    .line-one {
-        font-size: 48px;
-        margin-bottom: 10px;
-    }
-
-    .line-two {
-        font-size: 24px;
-    }
-
-    @keyframes fadeIn {
-        0% {
+        #quote-container {
+            text-align: center;
+            color: #333;
             opacity: 0;
             transform: translateY(100%);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0%);
-        }
-    }
-        
-    /* Media Queries */
-        @media (max-width: 768px) {
-            /* Adjust font-size for smaller screens */
-            .text-container {
-                font-size: 24px;
-            }
+            animation: fadeIn 1s ease-in-out forwards;
         }
 
-        @media (max-width: 480px) {
-            /* Adjust font-size for even smaller screens */
-            .text-container {
-                font-size: 18px;
+        #quote {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        #author {
+            font-size: 18px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(100%);
             }
-    }        
+            100% {
+                opacity: 1;
+                transform: translateY(0%);
+            }
+        }
     </style>
 </head>
 <body>
@@ -71,68 +53,67 @@
     </div>
 
     <script>
-        // Array of quotes
-// Array of quotes
-var quotes = [
-    {
-        text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-        author: "Nelson Mandela"
-    },
-    {
-        text: "The way to get started is to quit talking and begin doing.",
-        author: "Walt Disney"
-    },
-    {
-        text: "If life were predictable it would cease to be life, and be without flavor.",
-        author: "Eleanor Roosevelt"
-    },
-    {
-        text: "Life is what happens when you're busy making other plans.",
-        author: "John Lennon"
-    },
-    {
-        text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
-        author: "Mother Teresa"
-    },
-    {
-        text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-        author: "Nelson Mandela"
-    },
-    {
-        text: "The way to get started is to quit talking and begin doing.",
-        author: "Walt Disney"
-    },
-    {
-        text: "If life were predictable it would cease to be life, and be without flavor.",
-        author: "Eleanor Roosevelt"
-    },
-    {
-        text: "Life is what happens when you're busy making other plans.",
-        author: "John Lennon"
-    },
-    {
-        text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
-        author: "Mother Teresa"
-    },
-    // Continue adding more quotes...
-    {
-        text: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-        author: "Winston Churchill"
-    },
-    {
-        text: "Life is 10% what happens to us and 90% how we react to it.",
-        author: "Charles R. Swindoll"
-    },
-    {
-        text: "The only way to do great work is to love what you do.",
-        author: "Steve Jobs"
-    },
-    // Add more quotes here...
-    {
-        text: "Believe you can and you're halfway there.",
-        author: "Theodore Roosevelt"
-    }
-];
+    // Array of quotes
+    var quotes = [
+        {
+            text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+            author: "Nelson Mandela"
+        },
+        {
+            text: "The way to get started is to quit talking and begin doing.",
+            author: "Walt Disney"
+        },
+        {
+            text: "If life were predictable it would cease to be life, and be without flavor.",
+            author: "Eleanor Roosevelt"
+        },
+        {
+            text: "Life is what happens when you're busy making other plans.",
+            author: "John Lennon"
+        },
+        {
+            text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
+            author: "Mother Teresa"
+        },
+        {
+            text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+            author: "Nelson Mandela"
+        },
+        {
+            text: "The way to get started is to quit talking and begin doing.",
+            author: "Walt Disney"
+        },
+        {
+            text: "If life were predictable it would cease to be life, and be without flavor.",
+            author: "Eleanor Roosevelt"
+        },
+        {
+            text: "Life is what happens when you're busy making other plans.",
+            author: "John Lennon"
+        },
+        {
+            text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
+            author: "Mother Teresa"
+        },
+        // Continue adding more quotes...
+        {
+            text: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+            author: "Winston Churchill"
+        },
+        {
+            text: "Life is 10% what happens to us and 90% how we react to it.",
+            author: "Charles R. Swindoll"
+        },
+        {
+            text: "The only way to do great work is to love what you do.",
+            author: "Steve Jobs"
+        },
+        // Add more quotes here...
+        {
+            text: "Believe you can and you're halfway there.",
+            author: "Theodore Roosevelt"
+        }
+    ];
 
         // Function to generate a random quote
         function generateRandomQuote() {
