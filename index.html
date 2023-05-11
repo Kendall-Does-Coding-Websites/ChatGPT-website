@@ -3,7 +3,7 @@
 <head>
     <title>Animated Text with Gradient Background</title>
     <style>
-    body {
+       body {
         background: linear-gradient(to right, #ff9a9e, #fad0c4);
         background-attachment: fixed;
         background-repeat: no-repeat;
@@ -25,7 +25,7 @@
         color: #333;
         opacity: 0;
         transform: translateY(100%);
-        animation: fadeIn 1s ease-in-out forwards;
+        animation: fadeIn 1.5s cubic-bezier(0.42, 0, 0.58, 1) forwards;
     }
 
     .line-one {
@@ -47,6 +47,7 @@
             transform: translateY(0%);
         }
     }
+
 
     /* Media Queries */
         @media (max-width: 768px) {
