@@ -21,12 +21,12 @@ body {
 }
 
 #quote {
-  font-size: 48px;
+  font-size: 36px;
   margin-bottom: 10px;
 }
 
 #author {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 @keyframes fadeIn {
@@ -43,11 +43,11 @@ body {
 /* Media queries */
 @media (max-width: 768px) {
   #quote {
-    font-size: 44px;
+    font-size: 40px;
   }
 
   #author {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
