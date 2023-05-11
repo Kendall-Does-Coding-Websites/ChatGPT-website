@@ -1,5 +1,7 @@
 # chatgpt-website
 
+## Quote Generator
+
 A website that was made entirely in ChatGPT
 - work in progress.
 
