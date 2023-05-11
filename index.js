@@ -62,37 +62,20 @@ var quotes = [
 
 // Function to generate a random quote
 function generateRandomQuote() {
-  var storedQuote = localStorage.getItem('previousQuote');
   var randomIndex = Math.floor(Math.random() * quotes.length);
-
-  // Check if the generated quote is the same as the previous quote
-  if (storedQuote && storedQuote === quotes[randomIndex].text) {
-    // Generate a new random quote
-    randomIndex = (randomIndex + 1) % quotes.length;
-  }
-
   var quoteElement = document.getElementById("quote");
   var authorElement = document.getElementById("author");
   quoteElement.textContent = quotes[randomIndex].text;
   authorElement.textContent = "- " + quotes[randomIndex].author;
-
-  // Store the displayed quote in local storage
-  localStorage.setItem('previousQuote', quotes[randomIndex].text);
 }
 
 // Function to handle visibility change
 function handleVisibilityChange() {
-  if (document.hidden) {
-    // Tab is hidden, stop the animation
+  if (!document.hidden) {
+    // Tab is visible, show the animation and generate a new quote
     var quoteContainer = document.getElementById("quote-container");
-    quoteContainer.classList.remove('show');
-  } else {
-    // Tab is visible, generate a new quote and check if animation needs to be restarted
+    quoteContainer.classList.add('show');
     generateRandomQuote();
-    var quoteContainer = document.getElementById("quote-container");
-    if (!quoteContainer.classList.contains('show')) {
-      quoteContainer.classList.add('show');
-    }
   }
 }
 
