@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animated Text with Gradient Background</title>
+    <style>
+  body {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+  }
+
+  .text-container {
+      position: relative;
+      display: inline-block;
+      color: white;
+      font-size: 32px;
+  }
+
+  .animated-text {
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+      /* Adjust font-size for smaller screens */
+      .text-container {
+          font-size: 24px;
+      }
+  }
+
+  @media (max-width: 480px) {
+      /* Adjust font-size for even smaller screens */
+      .text-container {
+        font-size: 18px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="text-container">
+        <span class="animated-text">KendallDoesCoding - made in ChatGPT</span>
+    </div>
+
+    <script>
+        // Wait for the document to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add 'show' class to trigger the animation
+            document.querySelector('.animated-text').classList.add('show');
+        });
+    </script>
+</body>
+</html>
