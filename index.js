@@ -80,12 +80,28 @@ function generateRandomQuote() {
   localStorage.setItem('previousQuote', quotes[randomIndex].text);
 }
 
+// Function to handle visibility change
+function handleVisibilityChange() {
+  if (document.hidden) {
+    // Tab is hidden, stop the animation
+    var quoteContainer = document.getElementById("quote-container");
+    quoteContainer.classList.remove('show');
+  } else {
+    // Tab is visible, restart the animation and generate a new quote
+    var quoteContainer = document.getElementById("quote-container");
+    quoteContainer.classList.add('show');
+    generateRandomQuote();
+  }
+}
+
 // Wait for the document to load
 document.addEventListener('DOMContentLoaded', function() {
-  // Add 'show' class to trigger the animation
-  var quoteContainer = document.getElementById("quote-container");
-  quoteContainer.classList.add('show');
-
   // Generate a random quote
   generateRandomQuote();
+
+  // Check for Page Visibility API support
+  if (typeof document.hidden !== "undefined") {
+    // Add event listeners for visibility change
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+  }
 });
