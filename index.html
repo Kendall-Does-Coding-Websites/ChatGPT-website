@@ -23,11 +23,8 @@
         align-items: center;
         justify-content: center;
         color: #333;
-        transform: translateY(100%);
-    }
-
-    .animated-text {
         opacity: 0;
+        transform: translateY(100%);
         animation: fadeIn 1s ease-in-out forwards;
     }
 
@@ -41,9 +38,16 @@
     }
 
     @keyframes fadeIn {
-        0% { opacity: 0; transform: translateY(100%); }
-        100% { opacity: 1; transform: translateY(0%); }
+        0% {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0%);
+        }
     }
+
     /* Media Queries */
         @media (max-width: 768px) {
             /* Adjust font-size for smaller screens */
