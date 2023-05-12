@@ -80,6 +80,7 @@ var quotes = [
     author: "Wayne Gretzky"
   },
 ];
+
 // Function to generate a random quote
 function generateRandomQuote() {
   var storedQuotes = JSON.parse(localStorage.getItem('shownQuotes')) || [];
@@ -120,22 +121,3 @@ document.addEventListener('DOMContentLoaded', function() {
   // Generate a random quote
   generateRandomQuote();
 });
-
-  // Update the quotes array with unique quotes
-  quotes = uniqueQuotes;
-}
-
-// Remove duplicate quotes
-removeDuplicateQuotes();
-
-// Wait for the document to load
-document.addEventListener('DOMContentLoaded', function() {
-  // Add 'show' class to trigger the animation
-  var quoteContainer = document.getElementById("quote-container");
-  quoteContainer.classList.add('show');
-
-  // Generate a random quote
-  generateRandomQuote();
-});
-
-
