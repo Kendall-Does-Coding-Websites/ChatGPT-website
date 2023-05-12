@@ -86,55 +86,44 @@ var quotes = [
 ];
 // Function to generate a random quote
 function generateRandomQuote() {
-  var storedQuotes = JSON.parse(localStorage.getItem('shownQuotes')) || [];
-  var uniqueQuotes = quotes.filter(function(quote) {
-    return !storedQuotes.some(function(storedQuote) {
-      return storedQuote.text === quote.text;
-    });
+  var storedQuotes = JSON.parse(localStorage.getItem('seenQuotes'));
+  var newQuotes = quotes.filter(function(quote) {
+    return !storedQuotes.includes(quote.text);
   });
 
-  // Check if all quotes have been shown
-  if (uniqueQuotes.length === 0) {
-    var quoteElement = document.getElementById("quote");
-    var authorElement = document.getElementById("author");
-    quoteElement.textContent = "All quotes have been shown to you.";
-    authorElement.innerHTML = 'Make sure to add more quotes <a href="https://github.com/Kendall-Does-Coding-Websites/ChatGPT-website/blob/main/index.js">here</a>.';
-    return;
-  }
-
-  var randomIndex = Math.floor(Math.random() * uniqueQuotes.length);
-  var quote = uniqueQuotes[randomIndex];
-
-  var quoteElement = document.getElementById("quote");
-  var authorElement = document.getElementById("author");
-  quoteElement.textContent = quote.text;
-  authorElement.textContent = "- " + quote.author;
-
-  // Store the displayed quote
-  storedQuotes.push(quote);
-  localStorage.setItem('shownQuotes', JSON.stringify(storedQuotes));
-}
-
-// Function to display previously seen quotes
-function displaySeenQuotes() {
-  var storedQuotes = JSON.parse(localStorage.getItem('shownQuotes')) || [];
-
-  // Display previously seen quotes
   var quoteElement = document.getElementById("quote");
   var authorElement = document.getElementById("author");
 
-  if (storedQuotes.length === 0) {
-    quoteElement.textContent = "You haven't seen any quotes yet.";
-    authorElement.textContent = "";
+  if (newQuotes.length > 0) {
+    // Display new quotes first
+    var randomIndex = Math.floor(Math.random() * newQuotes.length);
+    var quote = newQuotes[randomIndex];
+
+    // Display the quote and author
+    quoteElement.textContent = quote.text;
+    authorElement.textContent = "- " + quote.author;
+
+    // Add the quote to the stored quotes
+    storedQuotes.push(quote.text);
+    localStorage.setItem('seenQuotes', JSON.stringify(storedQuotes));
   } else {
-    var quoteHtml = "";
-    storedQuotes.forEach(function(quote) {
-      quoteHtml += '<p>"' + quote.text + '"</p>';
-      quoteHtml += '<p>- ' + quote.author + '</p>';
-    });
+    // Check if all quotes have been seen
+    if (storedQuotes.length === quotes.length) {
+      // Display the message and link
+      quoteElement.innerHTML = "All quotes have been shown to you.";
+      authorElement.innerHTML = "Make sure to add more quotes <a href='https://github.com/Kendall-Does-Coding-Websites/ChatGPT-website/blob/main/index.js'>here</a>.";
+      authorElement.style.color = "blue"; // Change the color to something that looks good with the background
+    } else {
+      // Display a previously seen quote
+      var randomIndex = Math.floor(Math.random() * storedQuotes.length);
+      var quote = quotes.find(function(quote) {
+        return quote.text === storedQuotes[randomIndex];
+      });
 
-    quoteElement.innerHTML = quoteHtml;
-    authorElement.textContent = "";
+      // Display the quote and author
+      quoteElement.textContent = quote.text;
+      authorElement.textContent = "- " + quote.author;
+    }
   }
 }
 
@@ -144,11 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var quoteContainer = document.getElementById("quote-container");
   quoteContainer.classList.add('show');
 
-  // Check if all quotes have been seen
-  var storedQuotes = JSON.parse(localStorage.getItem('shownQuotes')) || [];
-  if (storedQuotes.length === quotes.length) {
-    displaySeenQuotes();
-  } else {
-    generateRandomQuote();
-  }
+  // Generate a random quote
+  generateRandomQuote();
 });
