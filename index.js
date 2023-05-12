@@ -79,6 +79,10 @@ var quotes = [
     text: "You miss 100% of the shots you don't take.",
     author: "Wayne Gretzky"
   },
+  {
+    text:"test",
+    author:"test"
+  },  
 ];
 // Function to generate a random quote
 function generateRandomQuote() {
