@@ -115,12 +115,40 @@ function generateRandomQuote() {
   localStorage.setItem('shownQuotes', JSON.stringify(storedQuotes));
 }
 
+// Function to display previously seen quotes
+function displaySeenQuotes() {
+  var storedQuotes = JSON.parse(localStorage.getItem('shownQuotes')) || [];
+
+  // Display previously seen quotes
+  var quoteElement = document.getElementById("quote");
+  var authorElement = document.getElementById("author");
+
+  if (storedQuotes.length === 0) {
+    quoteElement.textContent = "You haven't seen any quotes yet.";
+    authorElement.textContent = "";
+  } else {
+    var quoteHtml = "";
+    storedQuotes.forEach(function(quote) {
+      quoteHtml += '<p>"' + quote.text + '"</p>';
+      quoteHtml += '<p>- ' + quote.author + '</p>';
+    });
+
+    quoteElement.innerHTML = quoteHtml;
+    authorElement.textContent = "";
+  }
+}
+
 // Wait for the document to load
 document.addEventListener('DOMContentLoaded', function() {
   // Add 'show' class to trigger the animation
   var quoteContainer = document.getElementById("quote-container");
   quoteContainer.classList.add('show');
 
-  // Generate a random quote
-  generateRandomQuote();
+  // Check if all quotes have been seen
+  var storedQuotes = JSON.parse(localStorage.getItem('shownQuotes')) || [];
+  if (storedQuotes.length === quotes.length) {
+    displaySeenQuotes();
+  } else {
+    generateRandomQuote();
+  }
 });
