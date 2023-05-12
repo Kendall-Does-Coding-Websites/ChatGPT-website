@@ -86,7 +86,7 @@ var quotes = [
 ];
 // Function to generate a random quote
 function generateRandomQuote() {
-  var storedQuotes = JSON.parse(localStorage.getItem('seenQuotes'));
+  var storedQuotes = JSON.parse(localStorage.getItem('seenQuotes')) || [];
   var newQuotes = quotes.filter(function(quote) {
     return !storedQuotes.includes(quote.text);
   });
