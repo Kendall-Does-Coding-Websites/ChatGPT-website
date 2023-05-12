@@ -93,6 +93,7 @@ function generateRandomQuote() {
 
   var quoteElement = document.getElementById("quote");
   var authorElement = document.getElementById("author");
+  var messageElement = document.getElementById("message");
 
   if (newQuotes.length > 0) {
     // Display new quotes first
@@ -106,13 +107,24 @@ function generateRandomQuote() {
     // Add the quote to the stored quotes
     storedQuotes.push(quote.text);
     localStorage.setItem('seenQuotes', JSON.stringify(storedQuotes));
+
+    // Reset the message element
+    messageElement.innerHTML = "";
+    messageElement.style.fontSize = "";
   } else {
     // Check if all quotes have been seen
     if (storedQuotes.length === quotes.length) {
-      // Display the message and link
-      quoteElement.innerHTML = "All quotes have been shown to you.";
-      authorElement.innerHTML = "Make sure to add more quotes <a href='https://github.com/Kendall-Does-Coding-Websites/ChatGPT-website/blob/main/index.js'>here</a>.";
-      authorElement.style.color = "blue"; // Change the color to something that looks good with the background
+      // Display a random quote
+      var randomIndex = Math.floor(Math.random() * quotes.length);
+      var quote = quotes[randomIndex];
+
+      // Display the quote and author
+      quoteElement.textContent = quote.text;
+      authorElement.textContent = "- " + quote.author;
+
+      // Display the message and link in small text
+      messageElement.innerHTML = "All quotes have been shown to you.<br>Make sure to add more quotes <a href='https://github.com/Kendall-Does-Coding-Websites/ChatGPT-website/blob/main/index.js'>here</a>.";
+      messageElement.style.fontSize = "small";
     } else {
       // Display a previously seen quote
       var randomIndex = Math.floor(Math.random() * storedQuotes.length);
@@ -123,6 +135,10 @@ function generateRandomQuote() {
       // Display the quote and author
       quoteElement.textContent = quote.text;
       authorElement.textContent = "- " + quote.author;
+
+      // Reset the message element
+      messageElement.innerHTML = "";
+      messageElement.style.fontSize = "";
     }
   }
 }
