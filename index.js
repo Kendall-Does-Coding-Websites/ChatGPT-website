@@ -82,38 +82,44 @@ var quotes = [
 ];
 // Function to generate a random quote
 function generateRandomQuote() {
-  var storedQuote = localStorage.getItem('previousQuote');
-  var randomIndex = Math.floor(Math.random() * quotes.length);
+  var storedQuotes = JSON.parse(localStorage.getItem('shownQuotes')) || [];
+  var uniqueQuotes = quotes.filter(function(quote) {
+    return !storedQuotes.some(function(storedQuote) {
+      return storedQuote.text === quote.text;
+    });
+  });
 
-  // Check if the generated quote is the same as the previous quote
-  if (storedQuote && storedQuote === quotes[randomIndex].text) {
-    // Generate a new random quote
-    randomIndex = (randomIndex + 1) % quotes.length;
+  // Check if all quotes have been shown
+  if (uniqueQuotes.length === 0) {
+    var quoteElement = document.getElementById("quote");
+    var authorElement = document.getElementById("author");
+    quoteElement.textContent = "Focused, hard work is the real key to success.";
+    authorElement.textContent = "John Carmack";
+    return;
   }
+
+  var randomIndex = Math.floor(Math.random() * uniqueQuotes.length);
+  var quote = uniqueQuotes[randomIndex];
 
   var quoteElement = document.getElementById("quote");
   var authorElement = document.getElementById("author");
-  quoteElement.textContent = quotes[randomIndex].text;
-  authorElement.textContent = "- " + quotes[randomIndex].author;
+  quoteElement.textContent = quote.text;
+  authorElement.textContent = "- " + quote.author;
 
-  // Store the displayed quote in local storage
-  localStorage.setItem('previousQuote', quotes[randomIndex].text);
+  // Store the displayed quote
+  storedQuotes.push(quote);
+  localStorage.setItem('shownQuotes', JSON.stringify(storedQuotes));
 }
 
-// Function to remove duplicate quotes
-function removeDuplicateQuotes() {
-  var uniqueQuotes = [];
-  var quoteTexts = [];
+// Wait for the document to load
+document.addEventListener('DOMContentLoaded', function() {
+  // Add 'show' class to trigger the animation
+  var quoteContainer = document.getElementById("quote-container");
+  quoteContainer.classList.add('show');
 
-  for (var i = 0; i < quotes.length; i++) {
-    var quote = quotes[i];
-
-    // Check if the quote text is already in the quoteTexts array
-    if (!quoteTexts.includes(quote.text)) {
-      uniqueQuotes.push(quote);
-      quoteTexts.push(quote.text);
-    }
-  }
+  // Generate a random quote
+  generateRandomQuote();
+});
 
   // Update the quotes array with unique quotes
   quotes = uniqueQuotes;
