@@ -29,6 +29,11 @@ body {
   font-size: 18px;
 }
 
+.message {
+    color: blue; /* Customize the color here */
+    font-size: small;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
