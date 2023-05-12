@@ -29,6 +29,11 @@ body {
   font-size: 18px;
 }
 
+.message {
+ color: #888888; /* Customize the color here */
+ font-size: small;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -39,6 +44,8 @@ body {
     transform: translateY(0%);
   }
 }
+
+
 
 /* Media queries */
 @media (max-width: 768px) {
