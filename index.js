@@ -80,7 +80,6 @@ var quotes = [
     author: "Wayne Gretzky"
   },
 ];
-
 // Function to generate a random quote
 function generateRandomQuote() {
   var storedQuotes = JSON.parse(localStorage.getItem('shownQuotes')) || [];
@@ -94,8 +93,8 @@ function generateRandomQuote() {
   if (uniqueQuotes.length === 0) {
     var quoteElement = document.getElementById("quote");
     var authorElement = document.getElementById("author");
-    quoteElement.textContent = "Focused, hard work is the real key to success.";
-    authorElement.textContent = "John Carmack";
+    quoteElement.textContent = "All quotes have been shown to you.";
+    authorElement.innerHTML = 'Make sure to add more quotes <a href="https://github.com/Kendall-Does-Coding-Websites/ChatGPT-website/blob/main/index.js">here</a>.';
     return;
   }
 
