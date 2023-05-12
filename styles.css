@@ -29,7 +29,7 @@ body {
   font-size: 18px;
 }
 
-.message {
+#message {
     color: blue; /* Customize the color here */
     font-size: small;
 }
