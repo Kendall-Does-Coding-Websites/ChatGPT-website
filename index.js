@@ -84,62 +84,60 @@ var quotes = [
     author:"test"
   },  
 ];
+// Retrieve the previously shown quotes from local storage
+var previousQuotes = JSON.parse(localStorage.getItem('previousQuotes')) || [];
+
+// Function to remove duplicate quotes
+function removeDuplicateQuotes() {
+  var uniqueQuotes = [];
+  var quoteTexts = [];
+
+  for (var i = 0; i < quotes.length; i++) {
+    var quote = quotes[i];
+
+    // Check if the quote text is already in the quoteTexts array or has been shown previously
+    if (!quoteTexts.includes(quote.text) && !previousQuotes.includes(quote.text)) {
+      uniqueQuotes.push(quote);
+      quoteTexts.push(quote.text);
+    }
+  }
+
+  // Update the quotes array with unique quotes
+  quotes = uniqueQuotes;
+}
+
+// Remove duplicate quotes
+removeDuplicateQuotes();
+
 // Function to generate a random quote
 function generateRandomQuote() {
-  var storedQuotes = JSON.parse(localStorage.getItem('seenQuotes')) || [];
-  var newQuotes = quotes.filter(function(quote) {
-    return !storedQuotes.includes(quote.text);
-  });
+  var randomIndex = Math.floor(Math.random() * quotes.length);
+  var quote = quotes[randomIndex];
+
+  // Remove the selected quote from the quotes array
+  quotes.splice(randomIndex, 1);
 
   var quoteElement = document.getElementById("quote");
   var authorElement = document.getElementById("author");
   var messageElement = document.getElementById("message");
 
-  if (newQuotes.length > 0) {
-    // Display new quotes first
-    var randomIndex = Math.floor(Math.random() * newQuotes.length);
-    var quote = newQuotes[randomIndex];
-
-    // Display the quote and author
+  if (quotes.length > 0) {
     quoteElement.textContent = quote.text;
     authorElement.textContent = "- " + quote.author;
 
-    // Add the quote to the stored quotes
-    storedQuotes.push(quote.text);
-    localStorage.setItem('seenQuotes', JSON.stringify(storedQuotes));
+    // Store the displayed quote in local storage
+    previousQuotes.push(quote.text);
+    localStorage.setItem('previousQuotes', JSON.stringify(previousQuotes));
 
     // Reset the message element
     messageElement.innerHTML = "";
-    messageElement.style.fontSize = "";
+    messageElement.classList.remove("message");
   } else {
-    // Check if all quotes have been seen
-    if (storedQuotes.length === quotes.length) {
-      // Display a random quote
-      var randomIndex = Math.floor(Math.random() * quotes.length);
-      var quote = quotes[randomIndex];
-
-      // Display the quote and author
-      quoteElement.textContent = quote.text;
-      authorElement.textContent = "- " + quote.author;
-
-      // Display the message and link in small text
-      messageElement.innerHTML = "All quotes have been shown to you.<br>Make sure to add more quotes <a href='https://github.com/Kendall-Does-Coding-Websites/ChatGPT-website/blob/main/index.js'>here</a>.";
-      messageElement.style.fontSize = "small";
-    } else {
-      // Display a previously seen quote
-      var randomIndex = Math.floor(Math.random() * storedQuotes.length);
-      var quote = quotes.find(function(quote) {
-        return quote.text === storedQuotes[randomIndex];
-      });
-
-      // Display the quote and author
-      quoteElement.textContent = quote.text;
-      authorElement.textContent = "- " + quote.author;
-
-      // Reset the message element
-      messageElement.innerHTML = "";
-      messageElement.style.fontSize = "";
-    }
+    // Display the message and link with custom styling
+    quoteElement.textContent = "All quotes have been shown to you.";
+    authorElement.innerHTML = "Make sure to add more quotes <a href='https://github.com/Kendall-Does-Coding-Websites/ChatGPT-website/blob/main/index.js'>here</a>.";
+    messageElement.innerHTML = "";
+    messageElement.classList.add("message");
   }
 }
 
