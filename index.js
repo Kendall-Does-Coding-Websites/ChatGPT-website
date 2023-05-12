@@ -78,49 +78,66 @@ var quotes = [
   {
     text: "You miss 100% of the shots you don't take.",
     author: "Wayne Gretzky"
-  },
+  }, 
 ];
 // Function to generate a random quote
 function generateRandomQuote() {
-  var storedQuote = localStorage.getItem('previousQuote');
-  var randomIndex = Math.floor(Math.random() * quotes.length);
-
-  // Check if the generated quote is the same as the previous quote
-  if (storedQuote && storedQuote === quotes[randomIndex].text) {
-    // Generate a new random quote
-    randomIndex = (randomIndex + 1) % quotes.length;
-  }
+  var storedQuotes = JSON.parse(localStorage.getItem('seenQuotes')) || [];
+  var newQuotes = quotes.filter(function(quote) {
+    return !storedQuotes.includes(quote.text);
+  });
 
   var quoteElement = document.getElementById("quote");
   var authorElement = document.getElementById("author");
-  quoteElement.textContent = quotes[randomIndex].text;
-  authorElement.textContent = "- " + quotes[randomIndex].author;
+  var messageElement = document.getElementById("message");
 
-  // Store the displayed quote in local storage
-  localStorage.setItem('previousQuote', quotes[randomIndex].text);
-}
+  if (newQuotes.length > 0) {
+    // Display new quotes first
+    var randomIndex = Math.floor(Math.random() * newQuotes.length);
+    var quote = newQuotes[randomIndex];
 
-// Function to remove duplicate quotes
-function removeDuplicateQuotes() {
-  var uniqueQuotes = [];
-  var quoteTexts = [];
+    // Display the quote and author
+    quoteElement.textContent = quote.text;
+    authorElement.textContent = "- " + quote.author;
 
-  for (var i = 0; i < quotes.length; i++) {
-    var quote = quotes[i];
+    // Add the quote to the stored quotes
+    storedQuotes.push(quote.text);
+    localStorage.setItem('seenQuotes', JSON.stringify(storedQuotes));
 
-    // Check if the quote text is already in the quoteTexts array
-    if (!quoteTexts.includes(quote.text)) {
-      uniqueQuotes.push(quote);
-      quoteTexts.push(quote.text);
+    // Reset the message element
+    messageElement.innerHTML = "";
+    messageElement.style.fontSize = "";
+  } else {
+    // Check if all quotes have been seen
+    if (storedQuotes.length === quotes.length) {
+      // Display a random quote
+      var randomIndex = Math.floor(Math.random() * quotes.length);
+      var quote = quotes[randomIndex];
+
+      // Display the quote and author
+      quoteElement.textContent = quote.text;
+      authorElement.textContent = "- " + quote.author;
+
+      // Display the message and link in small text
+      messageElement.innerHTML = "All quotes have been shown to you.<br>Make sure to add more quotes <a href='https://github.com/Kendall-Does-Coding-Websites/ChatGPT-website/blob/main/index.js'>here</a>.";
+      messageElement.style.fontSize = "small";
+    } else {
+      // Display a previously seen quote
+      var randomIndex = Math.floor(Math.random() * storedQuotes.length);
+      var quote = quotes.find(function(quote) {
+        return quote.text === storedQuotes[randomIndex];
+      });
+
+      // Display the quote and author
+      quoteElement.textContent = quote.text;
+      authorElement.textContent = "- " + quote.author;
+
+      // Reset the message element
+      messageElement.innerHTML = "";
+      messageElement.style.fontSize = "";
     }
   }
-
-  // Update the quotes array with unique quotes
-  quotes = uniqueQuotes;
 }
-
-// Remove duplicate quotes
-removeDuplicateQuotes();
 
 // Wait for the document to load
 document.addEventListener('DOMContentLoaded', function() {
@@ -131,5 +148,3 @@ document.addEventListener('DOMContentLoaded', function() {
   // Generate a random quote
   generateRandomQuote();
 });
-
-
