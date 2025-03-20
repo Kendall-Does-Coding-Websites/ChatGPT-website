@@ -1,6 +1,6 @@
 # ChatGPT-website
 
-![ChatGPT-website](https://chatgpt-website.kendalldoescoding.tech/images/download.png)
+![ChatGPT-website](https://chatgpt-website.kencodes.tech/images/download.png)
 
 ## Quote Generator
 
